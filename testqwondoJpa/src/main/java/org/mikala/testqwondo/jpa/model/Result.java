@@ -1,5 +1,5 @@
 
-package pl.zetokatowice.testqwondo.jpa.model;
+package org.mikala.testqwondo.jpa.model;
 
 import java.util.Date;
 

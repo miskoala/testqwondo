@@ -1,7 +1,6 @@
-package pl.zetokatowice.testqwondo.jpa.repository;
+package org.mikala.testqwondo.jpa.repository;
+import org.mikala.testqwondo.jpa.model.TaskGroup;
 import org.springframework.data.repository.CrudRepository;
-
-import pl.zetokatowice.testqwondo.jpa.model.TaskGroup;
 public interface TaskGroupRepository extends CrudRepository<TaskGroup, Long>{
 
 }

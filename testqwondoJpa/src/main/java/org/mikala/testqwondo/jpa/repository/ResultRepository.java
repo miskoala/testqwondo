@@ -1,7 +1,6 @@
-package pl.zetokatowice.testqwondo.jpa.repository;
+package org.mikala.testqwondo.jpa.repository;
+import org.mikala.testqwondo.jpa.model.Result;
 import org.springframework.data.repository.CrudRepository;
-
-import pl.zetokatowice.testqwondo.jpa.model.Result;
 public interface ResultRepository extends CrudRepository<Result, Long>{
 
 }

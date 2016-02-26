@@ -1,7 +1,12 @@
-package pl.zetokatowice.testqwondo.jpa;
+package org.mikala.testqwondo.jpa;
 
 import java.util.Date;
 
+import org.mikala.testqwondo.jpa.model.Plan;
+import org.mikala.testqwondo.jpa.model.PlanType;
+import org.mikala.testqwondo.jpa.model.User;
+import org.mikala.testqwondo.jpa.repository.PlanRepository;
+import org.mikala.testqwondo.jpa.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,12 +14,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import pl.zetokatowice.testqwondo.jpa.model.Plan;
-import pl.zetokatowice.testqwondo.jpa.model.PlanType;
-import pl.zetokatowice.testqwondo.jpa.model.User;
-import pl.zetokatowice.testqwondo.jpa.repository.PlanRepository;
-import pl.zetokatowice.testqwondo.jpa.repository.UserRepository;
 
 @SpringBootApplication
 public class Application {

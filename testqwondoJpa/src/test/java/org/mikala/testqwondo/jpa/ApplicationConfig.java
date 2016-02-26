@@ -1,4 +1,4 @@
-package pl.zetokatowice.testqwondo.jpa;
+package org.mikala.testqwondo.jpa;
 
 import java.util.Properties;
 
@@ -38,7 +38,7 @@ class ApplicationConfig {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("pl.zetokatowice.testqwondo.jpa.model");
+		factory.setPackagesToScan("org.mikala.testqwondo.jpa.model","org.mikala.testqwondo.jpa.repository");
 		factory.setDataSource(dataSource());
 		factory.afterPropertiesSet();
 		factory.setJpaProperties(additionalProperties());

@@ -1,7 +1,6 @@
-package pl.zetokatowice.testqwondo.jpa.repository;
+package org.mikala.testqwondo.jpa.repository;
+import org.mikala.testqwondo.jpa.model.User;
 import org.springframework.data.repository.CrudRepository;
-
-import pl.zetokatowice.testqwondo.jpa.model.User;
 public interface UserRepository extends CrudRepository<User, Long>{
 
 }
