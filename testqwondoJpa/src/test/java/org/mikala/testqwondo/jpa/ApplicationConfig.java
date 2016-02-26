@@ -34,14 +34,16 @@ class ApplicationConfig {
 	public EntityManagerFactory entityManagerFactory() {
 
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		
 		vendorAdapter.setGenerateDdl(true);
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan("org.mikala.testqwondo.jpa.model","org.mikala.testqwondo.jpa.repository");
 		factory.setDataSource(dataSource());
-		factory.afterPropertiesSet();
+		factory.setMappingResources("orm.xml");
 		factory.setJpaProperties(additionalProperties());
+		factory.afterPropertiesSet();
 		return factory.getObject();
 	}
 

@@ -1,4 +1,4 @@
-package org.mikala.testqwondo.api;
+package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
 import java.util.Set;
