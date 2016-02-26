@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.mikala.testqwondo</groupId>
-  <artifactId>testqwondo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<groupId>org.mikala.testqwondo</groupId>
+	<artifactId>testqwondo</artifactId>
+	<version>${testqwondo.version}</version>
+	<packaging>pom</packaging>
 
-  <name>testqwondo</name>
-  <url>http://maven.apache.org</url>
+	<name>testqwondo</name>
+	<url>http://maven.apache.org</url>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.2.RELEASE</version>
+		<version>1.3.3.RELEASE</version>
 	</parent>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<api.version>1.0.0-SMAPSHOT</api.version>
+		<jpa.version>1.0.0-SNAPSHOT</jpa.version>
+		<tests.version>1.0.0-SNAPSHOT</tests.version>
+		<java.version>1.8</java.version>
+		<testqwondo.version>1.0.0-SNAPSHOT</testqwondo.version>
+	</properties>
 
-  <modules>
-  	<module>hibernate</module>
-  	<module>testqwondoHibernate</module>
-  	<module>testqwondoJpa</module>
-    <module>testqwondoApi</module>
-  </modules>
+	<modules>
+		<module>testqwondoJpa</module>
+		<module>testqwondoApi</module>
+		<module>testqwondoTests</module>
+	</modules>
+	<dependencies>
+
+	</dependencies>
 </project>

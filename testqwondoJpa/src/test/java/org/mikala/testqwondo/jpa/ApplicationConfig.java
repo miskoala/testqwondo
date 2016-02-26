@@ -24,7 +24,7 @@ class ApplicationConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
-		driver.setUrl("jdbc:postgresql://localhost:5437/testqwondo");
+		driver.setUrl("jdbc:postgresql://localhost:5432/testqwondo");
 		driver.setUsername("postgres");
 		driver.setPassword("resist");
 		return driver;
@@ -41,7 +41,7 @@ class ApplicationConfig {
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan("org.mikala.testqwondo.jpa.model","org.mikala.testqwondo.jpa.repository");
 		factory.setDataSource(dataSource());
-		factory.setMappingResources("orm.xml");
+		//factory.setMappingResources("orm.xml");
 		factory.setJpaProperties(additionalProperties());
 		factory.afterPropertiesSet();
 		return factory.getObject();
