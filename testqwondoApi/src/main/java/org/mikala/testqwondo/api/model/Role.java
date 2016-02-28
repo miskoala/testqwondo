@@ -8,14 +8,13 @@ import java.util.Set;
  * The persistent class for the role database table.
  * 
  */
-public class Role implements Serializable {
+public class Role extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String role;
 
 	private String description;
 
-	//bi-directional many-to-many association to User
 	private Set<User> users;
 
 	public Role() {

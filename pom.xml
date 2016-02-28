@@ -30,6 +30,19 @@
 		<module>testqwondoTests</module>
 	</modules>
 	<dependencies>
-
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>6.9.10</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

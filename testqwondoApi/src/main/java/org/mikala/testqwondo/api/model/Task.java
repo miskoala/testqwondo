@@ -9,7 +9,7 @@ import java.util.Set;
  * The persistent class for the task database table.
  * 
  */
-public class Task implements Serializable {
+public class Task extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -26,19 +26,14 @@ public class Task implements Serializable {
 
 	private String symbol;
 
-	//bi-directional many-to-one association to Result
 	private Set<Result> results;
 
-	//bi-directional many-to-one association to Plan
 	private Plan plan;
 
-	//bi-directional many-to-one association to Taskgroup
-	private Taskgroup taskgroup;
+	private TaskGroup taskgroup;
 
-	//bi-directional many-to-one association to User
 	private User user1;
 
-	//bi-directional many-to-one association to User
 	private User user2;
 
 	public Task() {
@@ -130,11 +125,11 @@ public class Task implements Serializable {
 		this.plan = plan;
 	}
 
-	public Taskgroup getTaskgroup() {
+	public TaskGroup getTaskgroup() {
 		return this.taskgroup;
 	}
 
-	public void setTaskgroup(Taskgroup taskgroup) {
+	public void setTaskgroup(TaskGroup taskgroup) {
 		this.taskgroup = taskgroup;
 	}
 

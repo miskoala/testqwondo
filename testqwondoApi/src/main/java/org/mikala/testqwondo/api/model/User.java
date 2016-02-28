@@ -8,7 +8,7 @@ import java.util.Set;
  * The persistent class for the users database table.
  * 
  */
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -23,23 +23,39 @@ public class User implements Serializable {
 
 	private String password;
 
-	//bi-directional many-to-one association to Plan
 	private Set<Plan> plans;
 
-	//bi-directional many-to-one association to Result
 	private Set<Result> results;
 
-	//bi-directional many-to-one association to Task
 	private Set<Task> tasks1;
 
-	//bi-directional many-to-one association to Task
 	private Set<Task> tasks2;
 
-	//bi-directional many-to-many association to Role
 	private Set<Role> roles;
 
 	public User() {
 	}
+
+
+
+
+
+
+
+	public User(String login, String password, String name, String email, String jabber) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.jabber = jabber;
+	}
+
+
+
+
+
+
 
 	public Long getId() {
 		return this.id;

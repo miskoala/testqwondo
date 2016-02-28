@@ -2,9 +2,9 @@ package org.mikala.testqwondo.jpa;
 
 import java.util.Date;
 
-import org.mikala.testqwondo.jpa.model.Plan;
-import org.mikala.testqwondo.jpa.model.PlanType;
-import org.mikala.testqwondo.jpa.model.User;
+import org.mikala.testqwondo.api.model.Plan;
+import org.mikala.testqwondo.api.model.PlanType;
+import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.jpa.repository.PlanRepository;
 import org.mikala.testqwondo.jpa.repository.UserRepository;
 import org.slf4j.Logger;

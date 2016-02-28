@@ -1,7 +1,7 @@
 package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -9,18 +9,18 @@ import java.util.Set;
  * The persistent class for the plan database table.
  * 
  */
-public class Plan implements Serializable {
+public class Plan extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
-	private Timestamp createtime;
+	private Date createtime;
 
 	private String name;
 
-	private Timestamp planedend;
+	private Date planedend;
 
-	private Timestamp planedstart;
+	private Date planedstart;
 
 	private String status;
 
@@ -28,18 +28,29 @@ public class Plan implements Serializable {
 
 	private String systemversion;
 
-	private String type;
+	private PlanType type;
 
-	//bi-directional many-to-one association to User
 	private User user;
 
-	//bi-directional many-to-one association to Task
 	private Set<Task> tasks;
 
-	//bi-directional many-to-one association to Taskgroup
-	private Set<Taskgroup> taskgroups;
+	private Set<TaskGroup> taskgroups;
 
 	public Plan() {
+	}
+
+	public Plan(String name, String system, String systemversion, Date createtime, PlanType type, String status,
+			Date planedstart, Date planedend, User user) {
+		super();
+		this.name = name;
+		this.system = system;
+		this.systemversion = systemversion;
+		this.createtime = createtime;
+		this.type = type;
+		this.status = status;
+		this.planedstart = planedstart;
+		this.planedend = planedend;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -50,11 +61,11 @@ public class Plan implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getCreatetime() {
+	public Date getCreatetime() {
 		return this.createtime;
 	}
 
-	public void setCreatetime(Timestamp createtime) {
+	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
 
@@ -66,19 +77,19 @@ public class Plan implements Serializable {
 		this.name = name;
 	}
 
-	public Timestamp getPlanedend() {
+	public Date getPlanedend() {
 		return this.planedend;
 	}
 
-	public void setPlanedend(Timestamp planedend) {
+	public void setPlanedend(Date planedend) {
 		this.planedend = planedend;
 	}
 
-	public Timestamp getPlanedstart() {
+	public Date getPlanedstart() {
 		return this.planedstart;
 	}
 
-	public void setPlanedstart(Timestamp planedstart) {
+	public void setPlanedstart(Date planedstart) {
 		this.planedstart = planedstart;
 	}
 
@@ -106,11 +117,11 @@ public class Plan implements Serializable {
 		this.systemversion = systemversion;
 	}
 
-	public String getType() {
+	public PlanType getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(PlanType type) {
 		this.type = type;
 	}
 
@@ -144,22 +155,22 @@ public class Plan implements Serializable {
 		return task;
 	}
 
-	public Set<Taskgroup> getTaskgroups() {
+	public Set<TaskGroup> getTaskgroups() {
 		return this.taskgroups;
 	}
 
-	public void setTaskgroups(Set<Taskgroup> taskgroups) {
+	public void setTaskgroups(Set<TaskGroup> taskgroups) {
 		this.taskgroups = taskgroups;
 	}
 
-	public Taskgroup addTaskgroup(Taskgroup taskgroup) {
+	public TaskGroup addTaskgroup(TaskGroup taskgroup) {
 		getTaskgroups().add(taskgroup);
 		taskgroup.setPlan(this);
 
 		return taskgroup;
 	}
 
-	public Taskgroup removeTaskgroup(Taskgroup taskgroup) {
+	public TaskGroup removeTaskgroup(TaskGroup taskgroup) {
 		getTaskgroups().remove(taskgroup);
 		taskgroup.setPlan(null);
 

@@ -16,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages={"org.mikala.testqwondo.jpa.repository"})
 @EnableTransactionManagement
 class ApplicationConfig {
 
@@ -39,9 +39,9 @@ class ApplicationConfig {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("org.mikala.testqwondo.jpa.model","org.mikala.testqwondo.jpa.repository");
+		factory.setPackagesToScan("org.mikala.testqwondo.jpa.model");
 		factory.setDataSource(dataSource());
-		//factory.setMappingResources("orm.xml");
+		factory.setMappingResources("orm.xml");
 		factory.setJpaProperties(additionalProperties());
 		factory.afterPropertiesSet();
 		return factory.getObject();
@@ -57,7 +57,8 @@ class ApplicationConfig {
 
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
 		return properties;
 	}
 }

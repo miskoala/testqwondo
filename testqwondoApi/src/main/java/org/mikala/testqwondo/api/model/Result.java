@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * The persistent class for the result database table.
  * 
  */
-public class Result implements Serializable {
+public class Result extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -23,10 +23,8 @@ public class Result implements Serializable {
 
 	private String type;
 
-	//bi-directional many-to-one association to Task
 	private Task task;
 
-	//bi-directional many-to-one association to User
 	private User user;
 
 	public Result() {
