@@ -1,6 +1,7 @@
 package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -23,7 +24,7 @@ public class User implements Serializable {
 
 	private String password;
 	
-	//private Set<UserRole> userRoles;
+	private Set<UserRole> userRoles;
 
 	public User() {
 	}
@@ -71,14 +72,35 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-/*	
+	
 	public Set<UserRole> getUserRoles() {
 		return userRoles;
 	}
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
-*/	
+	public UserRole addUserRole(UserRole userRole) {
+		if(getUserRoles()==null){
+			setUserRoles(new LinkedHashSet<UserRole>());
+		}
+		getUserRoles().add(userRole);
+		userRole.setUser(this);
+
+		return userRole;
+	}
+
+	public UserRole removeUserRole(UserRole userRole) {
+		if(getUserRoles()==null){
+			//TODO co by tu zwrocic?
+			return userRole;
+		}
+		getUserRoles().remove(userRole);
+		userRole.setUser(null);
+
+		return userRole;
+	}
+	
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

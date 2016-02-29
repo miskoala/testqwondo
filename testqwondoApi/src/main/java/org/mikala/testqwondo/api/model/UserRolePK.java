@@ -3,27 +3,36 @@ package org.mikala.testqwondo.api.model;
 import java.io.Serializable;
 
 public class UserRolePK implements Serializable{
-	private Long userId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private User user;
 	private Role role;
 	public UserRolePK() {
 		super();
 	}
-	public UserRolePK(Long userId, Role role) {
+	
+	public UserRolePK(User user, Role role) {
 		super();
-		this.userId = userId;
+		this.user = user;
 		this.role = role;
 	}
-	public Long getUserId() {
-		return userId;
+
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }

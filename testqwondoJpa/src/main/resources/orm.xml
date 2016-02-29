@@ -20,6 +20,7 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="org.mikala.testqwondo.api.model.Plan">
+		<table name="plans"></table>
 		<attributes>
 			<basic name="name">
 				<column length="100" nullable="false" unique="true"/>
@@ -50,44 +51,12 @@
 			</one-to-many>
 		</attributes>
 	</entity>
-		<entity class="org.mikala.testqwondo.api.model.User">
-		<table name="users"/>
-		<attributes>
-			<id name="id">
-				<generated-value strategy="IDENTITY"/>
-			</id>
-			<basic name="login">
-			</basic>
-			<basic name="name">
-			</basic>
-			<basic name="email">
-			</basic>
-			<basic name="jabber">
-			</basic>
-			<basic name="password">
-			</basic>
-<!-- 			<one-to-many name="userRoles" mapped-by="user" target-entity="org.mikala.testqwondo.api.model.UserRole">
-			
-			</one-to-many> -->
-<!-- 		<one-to-many name="results" mapped-by="user" target-entity="org.mikala.testqwondo.model.Result">
-			</one-to-many>
-			<one-to-many name="tasks1" mapped-by="user1" target-entity="org.mikala.testqwondo.model.Task">
-			</one-to-many>
-			<one-to-many name="tasks2" mapped-by="user2" target-entity="org.mikala.testqwondo.model.Task">
-			</one-to-many>
-			<many-to-many name="roles" target-entity="org.mikala.testqwondo.model.Role">
-				<join-table name="user_roles">
-					<join-column name="user_id"/>
-					<inverse-join-column name="role"/>
-				</join-table>
-			</many-to-many>
--->	
-		</attributes>
-	</entity>
+
 	
 	
 	
 	<entity class="org.mikala.testqwondo.api.model.Result">
+		<table name="results"></table>
 		<attributes>
 			<basic name="bugzillanr">
 			</basic>
@@ -116,6 +85,7 @@
 	</entity>
 -->
 	<entity class="org.mikala.testqwondo.api.model.Task">
+		<table name="tasks"></table>
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY"/>
@@ -149,6 +119,7 @@
 		</attributes>
 	</entity>
 	<entity class="org.mikala.testqwondo.api.model.TaskGroup">
+		<table name="task_groups"></table>
 		<attributes>
 			<basic name="bugzillaNr">
 			</basic>
@@ -167,20 +138,49 @@
 			
 		</attributes>
 	</entity>
-	<embeddable class="org.mikala.testqwondo.api.model.UserRolePK">
+	<entity class="org.mikala.testqwondo.api.model.User">
+		<table name="users"/>
 		<attributes>
-			<id name="userId"></id>
-			<id name="role"></id>
-		</attributes>
-	</embeddable>	
-	<entity class="org.mikala.testqwondo.api.model.UserRole">
-		<attributes>
-			<embedded name="userRolePK"></embedded>
-			<id name="userId"></id>
-			<id name="role"></id>
+			<id name="id">
+				<generated-value strategy="IDENTITY"/>
+			</id>
+			<basic name="login">
+			</basic>
+			<basic name="name">
+			</basic>
+			<basic name="email">
+			</basic>
+			<basic name="jabber">
+			</basic>
+			<basic name="password">
+			</basic>
+ 			<one-to-many name="userRoles" mapped-by="user" target-entity="org.mikala.testqwondo.api.model.UserRole" fetch="EAGER">
+			</one-to-many> 
 		</attributes>
 	</entity>
- 
+	<entity class="org.mikala.testqwondo.api.model.UserRole">
+		<table name="user_roles"></table>
+		<attributes>
+			<embedded-id  name="id">
+				<attribute-override name="userId"><column name="user_id" nullable="false"/></attribute-override>
+				<attribute-override name="role"><column name="role" nullable="false"/></attribute-override>
+			</embedded-id>
+			<many-to-one name="user" target-entity="org.mikala.testqwondo.api.model.User" access="FIELD">
+				<join-column name="user_id" column-definition="bigint" insertable="false" updatable="false" nullable="false"/>
+			</many-to-one>
+		</attributes>
+	</entity>
+	<embeddable class="org.mikala.testqwondo.api.model.UserRoleId">
+		<attributes>
+			<basic name="role">
+				<column name="role" length="20" nullable="false"/>
+				<enumerated>STRING</enumerated>
+			</basic>
+			<basic name="userId" >
+				<column name = "user_id" nullable = "false"/>
+			</basic>
+		</attributes>
+	</embeddable> 
 
 	
 </entity-mappings>

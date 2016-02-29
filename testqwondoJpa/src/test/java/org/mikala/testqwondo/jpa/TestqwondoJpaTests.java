@@ -35,7 +35,9 @@ public class TestqwondoJpaTests extends AbstractTestNGSpringContextTests{
 
 		Set<Plan> pl = pr.findByStatus(PlanStatus.N);
 		pr.findAll();
-		
-		
+		pr.delete(p);
+		pr.delete(p1);
+		pr.delete(p2);
+		ur.delete(u);
 	}
 }
