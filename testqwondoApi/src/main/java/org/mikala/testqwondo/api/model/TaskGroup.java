@@ -4,16 +4,11 @@ import java.io.Serializable;
 import java.util.Set;
 
 
-/**
- * The persistent class for the taskgroup database table.
- * 
- */
+
 public class TaskGroup extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
-	private Integer bugzillanr;
+	private Integer bugzillaNr;
 
 	private String name;
 
@@ -21,27 +16,19 @@ public class TaskGroup extends BaseEntity implements Serializable {
 
 	private Plan plan;
 
-	private TaskGroup taskgroup;
+	private TaskGroup parentTaskGroup;
 
-	private Set<TaskGroup> taskgroups;
+	private Set<TaskGroup> taskGroups;
 
 	public TaskGroup() {
 	}
 
-	public Long getId() {
-		return this.id;
+	public Integer getBugzillaNr() {
+		return bugzillaNr;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getBugzillanr() {
-		return this.bugzillanr;
-	}
-
-	public void setBugzillanr(Integer bugzillanr) {
-		this.bugzillanr = bugzillanr;
+	public void setBugzillaNr(Integer bugzillaNr) {
+		this.bugzillaNr = bugzillaNr;
 	}
 
 	public String getName() {
@@ -51,7 +38,6 @@ public class TaskGroup extends BaseEntity implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public Set<Task> getTasks() {
 		return this.tasks;
 	}
@@ -62,18 +48,17 @@ public class TaskGroup extends BaseEntity implements Serializable {
 
 	public Task addTask(Task task) {
 		getTasks().add(task);
-		task.setTaskgroup(this);
+		task.setTaskGroup(this);
 
 		return task;
 	}
 
 	public Task removeTask(Task task) {
 		getTasks().remove(task);
-		task.setTaskgroup(null);
+		task.setTaskGroup(null);
 
 		return task;
 	}
-
 	public Plan getPlan() {
 		return this.plan;
 	}
@@ -82,33 +67,36 @@ public class TaskGroup extends BaseEntity implements Serializable {
 		this.plan = plan;
 	}
 
-	public TaskGroup getTaskgroup() {
-		return this.taskgroup;
+	public TaskGroup getParentTaskGroup() {
+		return parentTaskGroup;
 	}
 
-	public void setTaskgroup(TaskGroup taskgroup) {
-		this.taskgroup = taskgroup;
+	public void setParentTaskGroup(TaskGroup parentTaskGroup) {
+		this.parentTaskGroup = parentTaskGroup;
 	}
 
-	public Set<TaskGroup> getTaskgroups() {
-		return this.taskgroups;
+	public Set<TaskGroup> getTaskGroups() {
+		return taskGroups;
 	}
 
-	public void setTaskgroups(Set<TaskGroup> taskgroups) {
-		this.taskgroups = taskgroups;
+	public void setTaskGroups(Set<TaskGroup> taskGroups) {
+		this.taskGroups = taskGroups;
 	}
 
-	public TaskGroup addTaskgroup(TaskGroup taskgroup) {
-		getTaskgroups().add(taskgroup);
-		taskgroup.setTaskgroup(this);
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public TaskGroup addTaskGroup(TaskGroup taskgroup) {
+		getTaskGroups().add(taskgroup);
+		taskgroup.setParentTaskGroup(this);
 
 		return taskgroup;
 	}
 
 	public TaskGroup removeTaskgroup(TaskGroup taskgroup) {
-		getTaskgroups().remove(taskgroup);
-		taskgroup.setTaskgroup(null);
-
+		getTaskGroups().remove(taskgroup);
+		taskgroup.setParentTaskGroup(null);
 		return taskgroup;
 	}
 

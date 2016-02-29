@@ -5,22 +5,17 @@ import java.sql.Timestamp;
 import java.util.Set;
 
 
-/**
- * The persistent class for the task database table.
- * 
- */
+
 public class Task extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private Long id;
 
 	private String description;
 
 	private Long duration;
 
-	private Timestamp endtime;
+	private Timestamp endTime;
 
-	private Timestamp starttime;
+	private Timestamp startTime;
 
 	private String status;
 
@@ -30,21 +25,13 @@ public class Task extends BaseEntity implements Serializable {
 
 	private Plan plan;
 
-	private TaskGroup taskgroup;
+	private TaskGroup taskGroup;
 
-	private User user1;
+	private User startedUser;
 
-	private User user2;
+	private User endedUser;
 
 	public Task() {
-	}
-
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getDescription() {
@@ -64,19 +51,19 @@ public class Task extends BaseEntity implements Serializable {
 	}
 
 	public Timestamp getEndtime() {
-		return this.endtime;
+		return this.endTime;
 	}
 
 	public void setEndtime(Timestamp endtime) {
-		this.endtime = endtime;
+		this.endTime = endtime;
 	}
 
-	public Timestamp getStarttime() {
-		return this.starttime;
+	public Timestamp getStartTime() {
+		return this.startTime;
 	}
 
-	public void setStarttime(Timestamp starttime) {
-		this.starttime = starttime;
+	public void setStartTime(Timestamp starttime) {
+		this.startTime = starttime;
 	}
 
 	public String getStatus() {
@@ -106,14 +93,12 @@ public class Task extends BaseEntity implements Serializable {
 	public Result addResult(Result result) {
 		getResults().add(result);
 		result.setTask(this);
-
 		return result;
 	}
 
 	public Result removeResult(Result result) {
 		getResults().remove(result);
 		result.setTask(null);
-
 		return result;
 	}
 
@@ -125,28 +110,28 @@ public class Task extends BaseEntity implements Serializable {
 		this.plan = plan;
 	}
 
-	public TaskGroup getTaskgroup() {
-		return this.taskgroup;
+	public TaskGroup getTaskGroup() {
+		return this.taskGroup;
 	}
 
-	public void setTaskgroup(TaskGroup taskgroup) {
-		this.taskgroup = taskgroup;
+	public void setTaskGroup(TaskGroup taskGroup) {
+		this.taskGroup = taskGroup;
 	}
 
-	public User getUser1() {
-		return this.user1;
+	public User getStartedUser() {
+		return this.startedUser;
 	}
 
-	public void setUser1(User user1) {
-		this.user1 = user1;
+	public void setStartedUser(User startedUser) {
+		this.startedUser = startedUser;
 	}
 
-	public User getUser2() {
-		return this.user2;
+	public User getEndedUser() {
+		return this.endedUser;
 	}
 
-	public void setUser2(User user2) {
-		this.user2 = user2;
+	public void setEndedUser(User endedUser) {
+		this.endedUser = endedUser;
 	}
 
 }

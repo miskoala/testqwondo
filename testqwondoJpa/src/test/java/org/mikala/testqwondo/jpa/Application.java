@@ -3,6 +3,7 @@ package org.mikala.testqwondo.jpa;
 import java.util.Date;
 
 import org.mikala.testqwondo.api.model.Plan;
+import org.mikala.testqwondo.api.model.PlanStatus;
 import org.mikala.testqwondo.api.model.PlanType;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.jpa.repository.PlanRepository;
@@ -29,7 +30,7 @@ public class Application {
 		return (args) -> {
 			User u = new User("admin", "password", "name", "email", "jabber");
 			ur.save(u);
-			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, "status", new Date(), new Date(),u);
+			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(),u);
 			repository.save(p);
 
 

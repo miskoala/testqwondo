@@ -5,133 +5,108 @@ import java.util.Date;
 import java.util.Set;
 
 
-/**
- * The persistent class for the plan database table.
- * 
- */
 public class Plan extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
-	private Date createtime;
-
 	private String name;
 
-	private Date planedend;
+	private Date planedEnd;
 
-	private Date planedstart;
+	private Date planedStart;
 
-	private String status;
+	private PlanStatus status;
 
 	private String system;
 
-	private String systemversion;
+	private String systemVersion;
 
 	private PlanType type;
 
-	private User user;
-
 	private Set<Task> tasks;
 
-	private Set<TaskGroup> taskgroups;
+	private Set<TaskGroup> taskGroups;
 
 	public Plan() {
 	}
 
-	public Plan(String name, String system, String systemversion, Date createtime, PlanType type, String status,
-			Date planedstart, Date planedend, User user) {
+	public Plan(String name, String system, String systemversion, Date createtime, PlanType type, PlanStatus status,
+			Date planedstart, Date planedend, User createdBy) {
 		super();
 		this.name = name;
 		this.system = system;
-		this.systemversion = systemversion;
-		this.createtime = createtime;
+		this.systemVersion = systemversion;
+		setCreatedTime(createtime);
 		this.type = type;
 		this.status = status;
-		this.planedstart = planedstart;
-		this.planedend = planedend;
-		this.user = user;
+		this.planedStart = planedstart;
+		this.planedEnd = planedend;
+		setCreatedBy(createdBy);
 	}
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Date getCreatetime() {
-		return this.createtime;
-	}
-
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
-	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Date getPlanedend() {
-		return this.planedend;
+	public Date getPlanedEnd() {
+		return planedEnd;
 	}
 
-	public void setPlanedend(Date planedend) {
-		this.planedend = planedend;
+	public void setPlanedEnd(Date planedEnd) {
+		this.planedEnd = planedEnd;
 	}
 
-	public Date getPlanedstart() {
-		return this.planedstart;
+	public Date getPlanedStart() {
+		return planedStart;
 	}
 
-	public void setPlanedstart(Date planedstart) {
-		this.planedstart = planedstart;
+	public void setPlanedStart(Date planedStart) {
+		this.planedStart = planedStart;
 	}
 
-	public String getStatus() {
-		return this.status;
+	public PlanStatus getStatus() {
+		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(PlanStatus status) {
 		this.status = status;
 	}
 
 	public String getSystem() {
-		return this.system;
+		return system;
 	}
 
 	public void setSystem(String system) {
 		this.system = system;
 	}
 
-	public String getSystemversion() {
-		return this.systemversion;
+	public String getSystemVersion() {
+		return systemVersion;
 	}
 
-	public void setSystemversion(String systemversion) {
-		this.systemversion = systemversion;
+	public void setSystemVersion(String systemVersion) {
+		this.systemVersion = systemVersion;
 	}
 
 	public PlanType getType() {
-		return this.type;
+		return type;
 	}
 
 	public void setType(PlanType type) {
 		this.type = type;
 	}
 
-	public User getUser() {
-		return this.user;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+
+
 
 	public Set<Task> getTasks() {
 		return this.tasks;
@@ -155,23 +130,23 @@ public class Plan extends BaseEntity implements Serializable {
 		return task;
 	}
 
-	public Set<TaskGroup> getTaskgroups() {
-		return this.taskgroups;
+	public Set<TaskGroup> getTaskGroups() {
+		return this.taskGroups;
 	}
 
-	public void setTaskgroups(Set<TaskGroup> taskgroups) {
-		this.taskgroups = taskgroups;
+	public void setTaskGroups(Set<TaskGroup> taskgroups) {
+		this.taskGroups = taskgroups;
 	}
 
 	public TaskGroup addTaskgroup(TaskGroup taskgroup) {
-		getTaskgroups().add(taskgroup);
+		getTaskGroups().add(taskgroup);
 		taskgroup.setPlan(this);
 
 		return taskgroup;
 	}
 
 	public TaskGroup removeTaskgroup(TaskGroup taskgroup) {
-		getTaskgroups().remove(taskgroup);
+		getTaskGroups().remove(taskgroup);
 		taskgroup.setPlan(null);
 
 		return taskgroup;

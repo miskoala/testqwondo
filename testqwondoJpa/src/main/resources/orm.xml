@@ -1,43 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
-	<entity class="org.mikala.testqwondo.model.Plan">
+	<mapped-superclass class="org.mikala.testqwondo.api.model.BaseEntity">
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY"/>
 			</id>
-			<basic name="createtime">
+			<basic name="createdTime">
+				<column name="created_time" nullable="false"/>
 			</basic>
-			<basic name="name">
-			</basic>
-			<basic name="planedend">
-			</basic>
-			<basic name="planedstart">
-			</basic>
-			<basic name="status">
-			</basic>
-			<basic name="system">
-			</basic>
-			<basic name="systemversion">
-			</basic>
-			<basic name="type">
-			</basic>
-			<many-to-one name="user" target-entity="org.mikala.testqwondo.model.User" fetch="LAZY">
+			<basic name="modifiedTime" >
+				<column name="modified_time" nullable="true"/>
+			</basic>			
+			<many-to-one name="createdBy" target-entity="org.mikala.testqwondo.api.model.User" fetch="EAGER" optional="false">
 				<join-column name="created_by_id"/>
 			</many-to-one>
-			<one-to-many name="tasks" mapped-by="plan" target-entity="org.mikala.testqwondo.model.Task">
+			<many-to-one name="modifiedBy" target-entity="org.mikala.testqwondo.api.model.User" fetch="EAGER" optional="true">
+				<join-column name="modified_by_id"/>
+			</many-to-one>			
+		</attributes>
+	</mapped-superclass>
+	<entity class="org.mikala.testqwondo.api.model.Plan">
+		<attributes>
+			<basic name="name">
+				<column length="100" nullable="false" unique="true"/>
+			</basic>
+			<basic name="system">
+				<column length="100" nullable="true"/>
+			</basic>
+			<basic name="systemVersion">
+				<column length="100" nullable="true" name="system_version"/>
+			</basic>
+			<basic name="planedEnd">
+				<column nullable="false" name="planed_end"/>
+			</basic>
+			<basic name="planedStart">
+				<column nullable="false" name="planed_start"/>
+			</basic>
+			<basic name="status">
+				<column length="2" nullable="false"/>
+				<enumerated>STRING</enumerated>
+			</basic>
+			<basic name="type">
+				<column length="2" nullable="false"/>
+				<enumerated>STRING</enumerated>
+			</basic>
+			<one-to-many name="taskGroups" mapped-by="plan" target-entity="org.mikala.testqwondo.api.model.TaskGroup">
 			</one-to-many>
-			<one-to-many name="taskgroups" mapped-by="plan" target-entity="org.mikala.testqwondo.model.Taskgroup">
+			<one-to-many name="tasks" mapped-by="plan" target-entity="org.mikala.testqwondo.api.model.Task">
 			</one-to-many>
 		</attributes>
 	</entity>
-	<entity class="org.mikala.testqwondo.model.Result">
+		<entity class="org.mikala.testqwondo.api.model.User">
+		<table name="users"/>
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY"/>
 			</id>
-			<basic name="bugzillanr">
+			<basic name="login">
 			</basic>
-			<basic name="createtime">
+			<basic name="name">
+			</basic>
+			<basic name="email">
+			</basic>
+			<basic name="jabber">
+			</basic>
+			<basic name="password">
+			</basic>
+<!-- 			<one-to-many name="userRoles" mapped-by="user" target-entity="org.mikala.testqwondo.api.model.UserRole">
+			
+			</one-to-many> -->
+<!-- 		<one-to-many name="results" mapped-by="user" target-entity="org.mikala.testqwondo.model.Result">
+			</one-to-many>
+			<one-to-many name="tasks1" mapped-by="user1" target-entity="org.mikala.testqwondo.model.Task">
+			</one-to-many>
+			<one-to-many name="tasks2" mapped-by="user2" target-entity="org.mikala.testqwondo.model.Task">
+			</one-to-many>
+			<many-to-many name="roles" target-entity="org.mikala.testqwondo.model.Role">
+				<join-table name="user_roles">
+					<join-column name="user_id"/>
+					<inverse-join-column name="role"/>
+				</join-table>
+			</many-to-many>
+-->	
+		</attributes>
+	</entity>
+	
+	
+	
+	<entity class="org.mikala.testqwondo.api.model.Result">
+		<attributes>
+			<basic name="bugzillanr">
 			</basic>
 			<basic name="description">
 			</basic>
@@ -45,13 +97,12 @@
 			</basic>
 			<basic name="type">
 			</basic>
-			<many-to-one name="task" target-entity="org.mikala.testqwondo.model.Task" fetch="LAZY">
-			</many-to-one>
-			<many-to-one name="user" target-entity="org.mikala.testqwondo.model.User" fetch="LAZY">
-				<join-column name="created_by_id"/>
+			<many-to-one name="task" target-entity="org.mikala.testqwondo.api.model.Task" fetch="LAZY">
+				<join-column name="task_id"/>
 			</many-to-one>
 		</attributes>
 	</entity>
+<!-- 
 	<entity class="org.mikala.testqwondo.model.Role">
 		<attributes>
 			<id name="role">
@@ -63,7 +114,8 @@
 			</many-to-many>
 		</attributes>
 	</entity>
-	<entity class="org.mikala.testqwondo.model.Task">
+-->
+	<entity class="org.mikala.testqwondo.api.model.Task">
 		<attributes>
 			<id name="id">
 				<generated-value strategy="IDENTITY"/>
@@ -80,70 +132,55 @@
 			</basic>
 			<basic name="symbol">
 			</basic>
-			<many-to-one name="plan" target-entity="org.mikala.testqwondo.model.Plan" fetch="LAZY">
+			<many-to-one name="plan" target-entity="org.mikala.testqwondo.api.model.Plan" fetch="LAZY">
+				<join-column name="plan_id"/>
 			</many-to-one>
-			<many-to-one name="taskgroup" target-entity="org.mikala.testqwondo.model.Taskgroup" fetch="LAZY">
+			<many-to-one name="taskGroup" target-entity="org.mikala.testqwondo.api.model.TaskGroup" fetch="LAZY">
+				<join-column name="task_group_id"/>
 			</many-to-one>
-			<many-to-one name="user1" target-entity="org.mikala.testqwondo.model.User" fetch="LAZY">
-				<join-column name="start_user_id"/>
+			<many-to-one name="startedUser" target-entity="org.mikala.testqwondo.api.model.User" fetch="LAZY" optional="true">
+				<join-column name="started_user_id"/>
 			</many-to-one>
-			<many-to-one name="user2" target-entity="org.mikala.testqwondo.model.User" fetch="LAZY">
-				<join-column name="end_user_id"/>
+			<many-to-one name="endedUser" target-entity="org.mikala.testqwondo.api.model.User" fetch="LAZY" optional="true">
+				<join-column name="ended_user_id"/>
 			</many-to-one>
-			<one-to-many name="results" mapped-by="task" target-entity="org.mikala.testqwondo.model.Result">
+			<one-to-many name="results" mapped-by="task" target-entity="org.mikala.testqwondo.api.model.Result">
 			</one-to-many>
 		</attributes>
 	</entity>
-	<entity class="org.mikala.testqwondo.model.Taskgroup">
+	<entity class="org.mikala.testqwondo.api.model.TaskGroup">
 		<attributes>
-			<id name="id">
-				<generated-value strategy="IDENTITY"/>
-			</id>
-			<basic name="bugzillanr">
+			<basic name="bugzillaNr">
 			</basic>
 			<basic name="name">
 			</basic>
-			<many-to-one name="plan" target-entity="org.mikala.testqwondo.model.Plan" fetch="LAZY">
+			<many-to-one name="plan" target-entity="org.mikala.testqwondo.api.model.Plan" fetch="LAZY" optional="false">
+				<join-column name="plan_id"/>
 			</many-to-one>
-			<many-to-one name="taskgroup" target-entity="org.mikala.testqwondo.model.Taskgroup" fetch="LAZY">
-				<join-column name="parent_taskgroup_id"/>
+			<many-to-one name="parentTaskGroup" target-entity="org.mikala.testqwondo.api.model.TaskGroup" fetch="LAZY">
+				<join-column name="parent_task_group_id"/>
 			</many-to-one>
-			<one-to-many name="tasks" mapped-by="taskgroup" target-entity="org.mikala.testqwondo.model.Task">
+			<one-to-many name="taskGroups" mapped-by="taskGroups" target-entity="org.mikala.testqwondo.api.model.TaskGroup">
 			</one-to-many>
-			<one-to-many name="taskgroups" mapped-by="taskgroup" target-entity="org.mikala.testqwondo.model.Taskgroup">
+			<one-to-many name="tasks" mapped-by="taskGroup" target-entity="org.mikala.testqwondo.api.model.Task">
 			</one-to-many>
+			
 		</attributes>
 	</entity>
-	<entity class="org.mikala.testqwondo.model.User">
-		<table name="users"/>
+	<embeddable class="org.mikala.testqwondo.api.model.UserRolePK">
 		<attributes>
-			<id name="id">
-				<generated-value strategy="IDENTITY"/>
-			</id>
-			<basic name="email">
-			</basic>
-			<basic name="jabber">
-			</basic>
-			<basic name="login">
-			</basic>
-			<basic name="name">
-			</basic>
-			<basic name="password">
-			</basic>
-			<one-to-many name="plans" mapped-by="user" target-entity="org.mikala.testqwondo.model.Plan">
-			</one-to-many>
-			<one-to-many name="results" mapped-by="user" target-entity="org.mikala.testqwondo.model.Result">
-			</one-to-many>
-			<one-to-many name="tasks1" mapped-by="user1" target-entity="org.mikala.testqwondo.model.Task">
-			</one-to-many>
-			<one-to-many name="tasks2" mapped-by="user2" target-entity="org.mikala.testqwondo.model.Task">
-			</one-to-many>
-			<many-to-many name="roles" target-entity="org.mikala.testqwondo.model.Role">
-				<join-table name="user_roles">
-					<join-column name="user_id"/>
-					<inverse-join-column name="role"/>
-				</join-table>
-			</many-to-many>
+			<id name="userId"></id>
+			<id name="role"></id>
+		</attributes>
+	</embeddable>	
+	<entity class="org.mikala.testqwondo.api.model.UserRole">
+		<attributes>
+			<embedded name="userRolePK"></embedded>
+			<id name="userId"></id>
+			<id name="role"></id>
 		</attributes>
 	</entity>
+ 
+
+	
 </entity-mappings>

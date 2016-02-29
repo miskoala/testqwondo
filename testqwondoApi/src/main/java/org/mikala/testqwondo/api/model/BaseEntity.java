@@ -5,9 +5,9 @@ import java.util.Date;
 public abstract class BaseEntity {
 	private Long id;
 	private Date createdTime;
-	private Date lastModifiedTime;
+	private Date modifiedTime;
 	private User createdBy;
-	private User lastModifiedBy;
+	private User modifiedBy;
 	
 	public Long getId() {
 		return id;
@@ -21,11 +21,11 @@ public abstract class BaseEntity {
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
 	}
-	public Date getLastModifiedTime() {
-		return lastModifiedTime;
+	public Date getModifiedTime() {
+		return modifiedTime;
 	}
-	public void setLastModifiedTime(Date lastModifiedTime) {
-		this.lastModifiedTime = lastModifiedTime;
+	public void setModifiedTime(Date lastModifiedTime) {
+		this.modifiedTime = lastModifiedTime;
 	}
 	public User getCreatedBy() {
 		return createdBy;
@@ -33,10 +33,10 @@ public abstract class BaseEntity {
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
-	public User getLastModifiedBy() {
-		return lastModifiedBy;
+	public User getModifiedBy() {
+		return modifiedBy;
 	}
-	public void setLastModifiedBy(User lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setModifiedBy(User lastModifiedBy) {
+		this.modifiedBy = lastModifiedBy;
 	}
 }

@@ -1,21 +1,11 @@
 package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-
-/**
- * The persistent class for the result database table.
- * 
- */
 public class Result extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
-	private Integer bugzillanr;
-
-	private Timestamp createtime;
+	private Integer bugzillaNr;
 
 	private String description;
 
@@ -25,33 +15,15 @@ public class Result extends BaseEntity implements Serializable {
 
 	private Task task;
 
-	private User user;
-
 	public Result() {
 	}
 
-	public Long getId() {
-		return this.id;
+	public Integer getBugzillaNr() {
+		return this.bugzillaNr;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getBugzillanr() {
-		return this.bugzillanr;
-	}
-
-	public void setBugzillanr(Integer bugzillanr) {
-		this.bugzillanr = bugzillanr;
-	}
-
-	public Timestamp getCreatetime() {
-		return this.createtime;
-	}
-
-	public void setCreatetime(Timestamp createtime) {
-		this.createtime = createtime;
+	public void setBugzillaNr(Integer bugzillanr) {
+		this.bugzillaNr = bugzillanr;
 	}
 
 	public String getDescription() {
@@ -84,14 +56,6 @@ public class Result extends BaseEntity implements Serializable {
 
 	public void setTask(Task task) {
 		this.task = task;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

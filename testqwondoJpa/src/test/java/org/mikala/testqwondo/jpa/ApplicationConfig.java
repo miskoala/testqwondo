@@ -24,7 +24,7 @@ class ApplicationConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
-		driver.setUrl("jdbc:postgresql://localhost:5432/testqwondo");
+		driver.setUrl("jdbc:postgresql://localhost:5437/testqwondo");
 		driver.setUsername("postgres");
 		driver.setPassword("resist");
 		return driver;
@@ -57,8 +57,9 @@ class ApplicationConfig {
 
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		properties.setProperty("spring.jpa.hibernate.ddl-auto", "create-drop");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		return properties;
 	}
 }

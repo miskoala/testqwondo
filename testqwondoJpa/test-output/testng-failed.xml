@@ -6,4 +6,18 @@
       <class name="org.mikala.testqwondo.jpa.TestqwondoJpaTests"/>
     </classes>
   </test> <!-- Default test -->
+  <test name="Default test(failed)">
+    <classes>
+      <class name="org.mikala.testqwondo.jpa.TestqwondoJpaTests">
+        <methods>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="testHome"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestMethod"/>
+          <include name="springTestContextAfterTestMethod"/>
+        </methods>
+      </class> <!-- org.mikala.testqwondo.jpa.TestqwondoJpaTests -->
+    </classes>
+  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
