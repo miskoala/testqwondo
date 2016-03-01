@@ -4,6 +4,7 @@ import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.spring.services.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.Test;
@@ -18,6 +19,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	//@Qualifier("userManagerService")
 	UserManagerService userManagerService;
 	@Test
+	@Rollback(false)
 	public void createDeleteUserTest() throws Exception {
 		logger.info("start");
 		User u = new User("login", "password", "name", "email", "jabber");
