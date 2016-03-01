@@ -34,8 +34,8 @@
 		</dependency> -->		
 		<dependency>
 			<groupId>org.mikala.testqwondo</groupId>
-			<artifactId>testqwondoJpa</artifactId>
-			<version>${jpa.version}</version>
+			<artifactId>testqwondoServer</artifactId>
+			<version>${server.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mikala.testqwondo</groupId>

@@ -20,13 +20,13 @@
 		<java.version>1.8</java.version>
 		<testqwondo.version>1.0.0-SNAPSHOT</testqwondo.version>
 		<api.version>1.0.0-SMAPSHOT</api.version>
-		<jpa.version>1.0.0-SNAPSHOT</jpa.version>
+		<server.version>1.0.0-SNAPSHOT</server.version>
 		<tests.version>1.0.0-SNAPSHOT</tests.version>
 	</properties>
 
 	<modules>
 		<module>testqwondoApi</module>
-		<module>testqwondoJpa</module>
+		<module>testqwondoServer</module>
 		<module>testqwondoTests</module>
 	</modules>
 	<dependencies>
