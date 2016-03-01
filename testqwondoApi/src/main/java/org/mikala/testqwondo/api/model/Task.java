@@ -50,11 +50,11 @@ public class Task extends BaseEntity implements Serializable {
 		this.duration = duration;
 	}
 
-	public Timestamp getEndtime() {
+	public Timestamp getEndTime() {
 		return this.endTime;
 	}
 
-	public void setEndtime(Timestamp endtime) {
+	public void setEndTime(Timestamp endtime) {
 		this.endTime = endtime;
 	}
 

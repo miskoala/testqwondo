@@ -6,17 +6,19 @@ import org.mikala.testqwondo.api.model.Plan;
 import org.mikala.testqwondo.api.model.PlanStatus;
 import org.mikala.testqwondo.api.model.PlanType;
 import org.mikala.testqwondo.api.model.User;
-import org.mikala.testqwondo.jpa.repository.PlanRepository;
-import org.mikala.testqwondo.jpa.repository.UserRepository;
+import org.mikala.testqwondo.spring.repository.PlanRepository;
+import org.mikala.testqwondo.spring.repository.UserRepository;
+import org.mikala.testqwondo.spring.services.UserManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+
 public class Application {
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);

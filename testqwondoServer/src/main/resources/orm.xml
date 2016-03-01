@@ -58,7 +58,7 @@
 	<entity class="org.mikala.testqwondo.api.model.Result">
 		<table name="results"></table>
 		<attributes>
-			<basic name="bugzillanr">
+			<basic name="bugzillaNr">
 			</basic>
 			<basic name="description">
 			</basic>
@@ -94,9 +94,9 @@
 			</basic>
 			<basic name="duration">
 			</basic>
-			<basic name="endtime">
+			<basic name="endTime">
 			</basic>
-			<basic name="starttime">
+			<basic name="startTime">
 			</basic>
 			<basic name="status">
 			</basic>
