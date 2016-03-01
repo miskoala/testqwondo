@@ -29,17 +29,15 @@ public class UserManagerService implements UserManager{
 		return userRepository.save(user);
 		
 	}
-
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-		
+		userRepository.delete(user);
 	}
-
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public void deleterUser(Long idUser) {
-		// TODO Auto-generated method stub
-		
+		userRepository.delete(idUser);
 	}
 
 	@Override
