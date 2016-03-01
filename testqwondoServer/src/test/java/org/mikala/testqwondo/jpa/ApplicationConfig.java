@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages={"org.mikala.testqwondo.spring.repository","org.mikala.testqwondo.spring.services"})
 @EnableJpaRepositories(basePackages={"org.mikala.testqwondo.spring.repository","org.mikala.testqwondo.spring.services"})
-@EnableTransactionManagement
+//@EnableTransactionManagement
 class ApplicationConfig {
 
 	

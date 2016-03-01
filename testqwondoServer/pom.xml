@@ -6,13 +6,12 @@
 	<parent>
 		<groupId>org.mikala.testqwondo</groupId>
 		<artifactId>testqwondo</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>testqwondoServer</artifactId>
 	<name>testqwondoServer</name>
 	<url>http://maven.apache.org</url>
-	<version>${server.version}</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -66,13 +65,12 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.mikala.testqwondo</groupId>
-			<artifactId>testqwondoApi</artifactId>
-			<version>${api.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mikala.testqwondo</groupId>
+			<artifactId>testqwondoApi</artifactId>
 		</dependency>
 	</dependencies>
 

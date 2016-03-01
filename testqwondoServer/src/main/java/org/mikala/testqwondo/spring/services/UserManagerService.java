@@ -9,24 +9,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-//@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 @Service(value="userManagerService")
 public class UserManagerService implements UserManager{
 
 	@Autowired
 	UserRepository userRepository;
 	
-	//@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public User getUser(Long userId) {
 		
 		return userRepository.findOne(userId);
 	}
 
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public User addUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(user);
+		
 	}
 
 	@Override

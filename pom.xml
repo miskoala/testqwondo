@@ -5,7 +5,7 @@
 
 	<groupId>org.mikala.testqwondo</groupId>
 	<artifactId>testqwondo</artifactId>
-	<version>${testqwondo.version}</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>testqwondo</name>
@@ -18,10 +18,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<testqwondo.version>1.0.0-SNAPSHOT</testqwondo.version>
-		<api.version>1.0.0-SNAPSHOT</api.version>
-		<server.version>1.0.0-SNAPSHOT</server.version>
-		<tests.version>1.0.0-SNAPSHOT</tests.version>
 	</properties>
 
 	<modules>
@@ -42,6 +38,21 @@
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
 				<version>6.9.10</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mikala.testqwondo</groupId>
+				<artifactId>testqwondoApi</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mikala.testqwondo</groupId>
+				<artifactId>testqwondoServer</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mikala.testqwondo</groupId>
+				<artifactId>testqwondoTests</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
