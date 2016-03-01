@@ -1,16 +1,10 @@
 package org.mikala.testqwondo.jpa;
 
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.mikala.testqwondo.spring.services.UserManagerService;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,35 +13,31 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"org.mikala.testqwondo.spring.repository"})
+@ComponentScan(basePackages={"org.mikala.testqwondo.spring.repository","org.mikala.testqwondo.spring.services"})
+@EnableJpaRepositories(basePackages={"org.mikala.testqwondo.spring.repository","org.mikala.testqwondo.spring.services"})
 @EnableTransactionManagement
-@WebAppConfiguration
-
 class ApplicationConfig {
 
 	
 	
-	@Bean
+/*	@Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
         factory.setPort(9009);
         factory.setSessionTimeout(10, TimeUnit.MINUTES);
         //factory.addErrorPages(new ErrorPage(HttpStatus.404, "/notfound.html"));
         return factory;
-    }
+    }*/
 	
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
-		driver.setUrl("jdbc:postgresql://localhost:5437/testqwondo");
+		driver.setUrl("jdbc:postgresql://localhost:5432/testqwondo");
 		driver.setUsername("postgres");
 		driver.setPassword("resist");
 		return driver;
@@ -75,6 +65,7 @@ class ApplicationConfig {
 
 		JpaTransactionManager txManager = new JpaTransactionManager();
 		txManager.setEntityManagerFactory(entityManagerFactory());
+		txManager.setNestedTransactionAllowed(true);
 		return txManager;
 	}
 

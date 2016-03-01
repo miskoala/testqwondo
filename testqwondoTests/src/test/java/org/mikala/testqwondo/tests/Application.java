@@ -1,4 +1,4 @@
-package org.mikala.testqwondo.jpa;
+package org.mikala.testqwondo.tests;
 
 import java.util.Date;
 

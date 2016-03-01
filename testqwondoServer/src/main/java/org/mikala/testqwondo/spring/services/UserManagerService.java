@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional(propagation = Propagation.REQUIRED)
+//@Transactional(propagation = Propagation.REQUIRED)
 @Service(value="userManagerService")
 public class UserManagerService implements UserManager{
 
 	@Autowired
 	UserRepository userRepository;
+	
+	//@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public User getUser(Long userId) {
 		
