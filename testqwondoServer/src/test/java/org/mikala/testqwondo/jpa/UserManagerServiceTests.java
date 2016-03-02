@@ -5,9 +5,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 
-import org.mikala.testqwondo.api.model.Role;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
+import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.services.UserManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

@@ -2,6 +2,8 @@ package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
 
+import org.mikala.testqwondo.api.model.enums.Role;
+
 
 
 public class UserRoleId implements Serializable {

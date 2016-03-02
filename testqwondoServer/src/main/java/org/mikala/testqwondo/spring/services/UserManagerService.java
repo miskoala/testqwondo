@@ -1,10 +1,10 @@
 package org.mikala.testqwondo.spring.services;
 
 import org.mikala.testqwondo.api.UserManager;
-import org.mikala.testqwondo.api.model.Role;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
 import org.mikala.testqwondo.api.model.UserRoleId;
+import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

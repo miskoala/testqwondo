@@ -1,4 +1,4 @@
-package org.mikala.testqwondo.api.model;
+package org.mikala.testqwondo.api.model.enums;
 
 public enum Role{
 	ADMIN,

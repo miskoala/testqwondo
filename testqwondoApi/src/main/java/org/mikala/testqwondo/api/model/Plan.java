@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import org.mikala.testqwondo.api.model.enums.PlanStatus;
+import org.mikala.testqwondo.api.model.enums.PlanType;
+
 
 public class Plan extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

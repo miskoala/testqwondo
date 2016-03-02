@@ -1,7 +1,7 @@
 package org.mikala.testqwondo.api;
 
-import org.mikala.testqwondo.api.model.Role;
 import org.mikala.testqwondo.api.model.User;
+import org.mikala.testqwondo.api.model.enums.Role;
 
 public interface UserManager {
 	public User getUser(Long userId);

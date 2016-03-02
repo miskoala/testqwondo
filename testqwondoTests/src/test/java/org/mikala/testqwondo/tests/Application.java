@@ -3,9 +3,9 @@ package org.mikala.testqwondo.tests;
 import java.util.Date;
 
 import org.mikala.testqwondo.api.model.Plan;
-import org.mikala.testqwondo.api.model.PlanStatus;
-import org.mikala.testqwondo.api.model.PlanType;
 import org.mikala.testqwondo.api.model.User;
+import org.mikala.testqwondo.api.model.enums.PlanStatus;
+import org.mikala.testqwondo.api.model.enums.PlanType;
 import org.mikala.testqwondo.spring.repository.PlanRepository;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.services.UserManagerService;
