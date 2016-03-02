@@ -34,25 +34,46 @@ public class UserRoleId implements Serializable {
 		this.userId = userId;
 	}
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof UserRoleId))
-			return false;
-		UserRoleId castOther = (UserRoleId) other;
-
-		return ((this.getRole() == castOther.getRole()) || (this.getRole() != null && castOther.getRole() != null
-				&& this.getRole().equals(castOther.getRole()))) && (this.getUserId() == castOther.getUserId());
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
 	}
 
-/*	public int hashCode() {
-		int result = 17;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof UserRoleId)) {
+			return false;
+		}
+		UserRoleId other = (UserRoleId) obj;
+		if (role != other.role) {
+			return false;
+		}
+		if (userId == null) {
+			if (other.userId != null) {
+				return false;
+			}
+		} else if (!userId.equals(other.userId)) {
+			return false;
+		}
+		return true;
+	}
 
-		result = 37 * result + (getRole() == null ? 0 : this.getRole().hashCode());
-		result = 37 * result + (int) this.getUserId();
-		return result;
-	}*/
+
 
 }

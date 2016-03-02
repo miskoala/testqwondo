@@ -145,16 +145,24 @@
 				<generated-value strategy="IDENTITY"/>
 			</id>
 			<basic name="login">
+				<column length="20" unique="true" nullable="false"/>
 			</basic>
 			<basic name="name">
+				<column length="200" unique="true" nullable="false"/>
 			</basic>
 			<basic name="email">
+				<column length="200" nullable="false"/>
 			</basic>
 			<basic name="jabber">
+				<column length="200"/>
 			</basic>
 			<basic name="password">
+				<column length="50" nullable="false"/>
 			</basic>
- 			<one-to-many name="userRoles" mapped-by="user" target-entity="org.mikala.testqwondo.api.model.UserRole" fetch="EAGER">
+ 			<one-to-many name="userRoles" mapped-by="user" target-entity="org.mikala.testqwondo.api.model.UserRole" fetch="EAGER" orphan-removal="true">
+ 				<cascade>
+ 					<cascade-all/>
+ 				</cascade>
 			</one-to-many> 
 		</attributes>
 	</entity>
@@ -165,9 +173,11 @@
 				<attribute-override name="userId"><column name="user_id" nullable="false"/></attribute-override>
 				<attribute-override name="role"><column name="role" nullable="false"/></attribute-override>
 			</embedded-id>
+			
 			<many-to-one name="user" target-entity="org.mikala.testqwondo.api.model.User" access="FIELD">
 				<join-column name="user_id" column-definition="bigint" insertable="false" updatable="false" nullable="false"/>
 			</many-to-one>
+			<transient name="role"></transient>
 		</attributes>
 	</entity>
 	<embeddable class="org.mikala.testqwondo.api.model.UserRoleId">

@@ -5,12 +5,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
-/**
- * The persistent class for the users database table.
- * 
- */
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+
+	private static final long serialVersionUID = -8526367903243161996L;
 
 	private Long id;
 
@@ -96,7 +94,6 @@ public class User implements Serializable {
 		}
 		getUserRoles().remove(userRole);
 		userRole.setUser(null);
-
 		return userRole;
 	}
 	
@@ -104,5 +101,89 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((jabber == null) ? 0 : jabber.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!email.equals(other.email)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (jabber == null) {
+			if (other.jabber != null) {
+				return false;
+			}
+		} else if (!jabber.equals(other.jabber)) {
+			return false;
+		}
+		if (login == null) {
+			if (other.login != null) {
+				return false;
+			}
+		} else if (!login.equals(other.login)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		if (password == null) {
+			if (other.password != null) {
+				return false;
+			}
+		} else if (!password.equals(other.password)) {
+			return false;
+		}
+		if (userRoles == null) {
+			if (other.userRoles != null) {
+				return false;
+			}
+		} else if (!userRoles.equals(other.userRoles)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 
 }
