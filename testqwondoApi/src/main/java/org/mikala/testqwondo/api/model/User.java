@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 
 public class User implements Serializable {
 	
@@ -12,14 +16,23 @@ public class User implements Serializable {
 
 	private Long id;
 
+	@NotBlank
+	@Size(min=2,max=20)
 	private String login;
 	
+	@NotBlank
+	@Size(min=2,max=200)
 	private String name;
-
+	
+	@NotBlank
+	@Size(min=5,max=200)
 	private String email;
 
+	@Size(max=200)
 	private String jabber;
 
+	@NotBlank
+	@Size(max=50)
 	private String password;
 	
 	private Set<UserRole> userRoles;

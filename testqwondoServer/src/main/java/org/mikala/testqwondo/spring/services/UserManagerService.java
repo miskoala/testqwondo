@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Service(value = "userManagerService")
@@ -28,7 +29,7 @@ public class UserManagerService implements UserManager {
 	}
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(@Validated User user) {
 		if(user==null) 
 			return null;
 		

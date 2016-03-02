@@ -3,6 +3,8 @@ package org.mikala.testqwondo.jpa;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.validation.ConstraintViolationException;
+
 import org.mikala.testqwondo.api.model.Role;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
@@ -27,6 +29,15 @@ public class UserManagerServiceTests extends AbstractTestNGSpringContextTests{
 		logger.info("Koniec testów w klasie UserManagerServiceTests");
 	}
 	
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void addUserValidateLoginTest() {
+		try {
+			User u = new User("", "", "", "", "");
+			u=userManagerService.saveUser(u);
+		} catch (ConstraintViolationException e) {
+			throw e;
+		}
+	}
 	@Test
 	public void addUserTest() {
 		User u = new User("login", "password", "name", "email", "jabber");
