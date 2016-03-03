@@ -7,6 +7,7 @@ import org.mikala.testqwondo.api.model.enums.Role;
 public class UserRole implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private UserRoleId id;
 	private User user;
 

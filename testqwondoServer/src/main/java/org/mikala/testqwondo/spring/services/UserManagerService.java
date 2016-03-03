@@ -1,5 +1,7 @@
 package org.mikala.testqwondo.spring.services;
 
+import javax.validation.constraints.NotNull;
+
 import org.mikala.testqwondo.api.UserManager;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
@@ -8,10 +10,11 @@ import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Service(value = "userManagerService")
@@ -29,10 +32,7 @@ public class UserManagerService implements UserManager {
 	}
 
 	@Override
-	public User saveUser(@Validated User user) {
-		if(user==null) 
-			return null;
-		
+	public User saveUser(@NotNull User user) {
 		return userRepository.save(user);
 	}
 
@@ -71,7 +71,10 @@ public class UserManagerService implements UserManager {
 		UserRole userRole=userRoleRepository.findOne(userRoleId);
 		user.removeUserRole(userRole);
 		user=userRepository.save(user);
-		//userRoleRepository.delete(userRoleId);
+		try { //czasami (transakcje) roli juz nie ma
+			userRoleRepository.delete(userRoleId);	
+		} catch (Exception e) {
+		}
 		return user;
 	}
 
@@ -82,5 +85,9 @@ public class UserManagerService implements UserManager {
 		if (userRoleRepository.findOne(new UserRoleId(user.getId(), role)) != null)
 			return true;
 		return false;
+	}
+	@Override
+	public Page<User> showUsers(String name, Pageable pageable) {
+		return userRepository.findByNameLikeIgnoreCase(name, pageable);
 	}
 }

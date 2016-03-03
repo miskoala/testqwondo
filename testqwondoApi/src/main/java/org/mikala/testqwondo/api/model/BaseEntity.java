@@ -3,6 +3,7 @@ package org.mikala.testqwondo.api.model;
 import java.util.Date;
 
 public abstract class BaseEntity {
+	
 	private Long id;
 	private Date createdTime;
 	private Date modifiedTime;

@@ -3,9 +3,10 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm 
 http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+<access>PROPERTY</access>
 	<mapped-superclass class="org.mikala.testqwondo.api.model.BaseEntity">
 		<attributes>
-			<id name="id">
+			<id name="id" access="PROPERTY">
 				<generated-value strategy="IDENTITY"/>
 			</id>
 			<basic name="createdTime">
