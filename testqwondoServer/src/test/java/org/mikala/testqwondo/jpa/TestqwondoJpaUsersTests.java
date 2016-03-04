@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
-import org.mikala.testqwondo.api.model.UserRoleId;
 import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
@@ -27,12 +26,10 @@ public class TestqwondoJpaUsersTests extends AbstractTestNGSpringContextTests{
 		
 		User u=new User("login", "password", "name", "email", "jabber");
 		ur.save(u);
-		UserRoleId id1=new UserRoleId(u.getId(),Role.ADMIN);
-		UserRole userRoleAdmin = new UserRole(id1,u);
+		UserRole userRoleAdmin = new UserRole(u,Role.ADMIN);
 		userRoleAdmin=urr.save(userRoleAdmin);
 
-		UserRoleId id2=new UserRoleId(u.getId(),Role.TESTER);
-		UserRole userRoleTester = new UserRole(id2, u);
+		UserRole userRoleTester = new UserRole(u, Role.TEST_MANAGER);
 		userRoleTester=urr.save(userRoleTester);
 		
 		u.addUserRole(userRoleAdmin);

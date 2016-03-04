@@ -4,38 +4,64 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 
+@Entity
+@Table(name="users")
 public class User implements Serializable {
 	
 
 	private static final long serialVersionUID = -8526367903243161996L;
 	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+	@Basic
+	@Column(length=50, unique=true, nullable=false)
 	@NotBlank
-	@Size(min=2,max=20)
+	@Size(min=2,max=50)
 	private String login;
 	
+	@Basic
+	@Column(length=200, unique=true, nullable=false)
 	@NotBlank
 	@Size(min=2,max=200)
 	private String name;
 	
+	@Basic
+	@Column( length=200, nullable=false)
 	@NotBlank
 	@Size(min=5,max=200)
 	private String email;
 
+	@Basic
+	@Column( length=200, nullable=true)
 	@Size(max=200)
 	private String jabber;
 
+	@Basic
+	@Column(length=100, nullable=false)
 	@NotBlank
-	@Size(max=50)
+	@Size(min=8, max=50)
 	private String password;
 	
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, 
+			orphanRemoval=true, targetEntity=UserRole.class, cascade={CascadeType.ALL})
 	private Set<UserRole> userRoles;
 
 	public User() {

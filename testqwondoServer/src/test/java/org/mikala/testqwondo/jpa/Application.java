@@ -1,13 +1,10 @@
 package org.mikala.testqwondo.jpa;
 
-import java.util.Date;
-
-import org.mikala.testqwondo.api.model.Plan;
 import org.mikala.testqwondo.api.model.User;
-import org.mikala.testqwondo.api.model.enums.PlanStatus;
-import org.mikala.testqwondo.api.model.enums.PlanType;
-import org.mikala.testqwondo.spring.repository.PlanRepository;
+import org.mikala.testqwondo.api.model.UserRole;
+import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
+import org.mikala.testqwondo.spring.repository.UserRoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -25,11 +22,20 @@ public class Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(PlanRepository repository,UserRepository ur) {
+	public CommandLineRunner demo(//PlanRepository repository,
+			UserRepository ur, UserRoleRepository urr) {
 		return (args) -> {
-			User u = new User("admin", "password", "name", "email", "jabber");
-			ur.save(u);
-			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(),u);
+			for (int i = 0; i < 20; i++) {
+				User u = new User("login"+i, "password"+i, "name"+i, "email"+i, "jabber"+i);
+				u=ur.save(u);
+				UserRole userRoleAdmin= new UserRole(u, Role.ADMIN);
+				userRoleAdmin=urr.save(userRoleAdmin);
+				UserRole userRoleMan= new UserRole(u, Role.TEST_MANAGER);
+				userRoleMan=urr.save(userRoleMan);
+				UserRole userRoleTes= new UserRole(u, Role.TESTER);
+				userRoleTes=urr.save(userRoleTes);
+			}
+/*			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(),u);
 			repository.save(p);
 
 
@@ -49,7 +55,7 @@ public class Application {
 			for (Plan plan1 : repository.findByName("name")) {
 				log.info(plan1.toString());
 			}
-            log.info("");
+            log.info("");*/
 		};
 	}
 

@@ -54,7 +54,7 @@ class ApplicationConfig {
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan("org.mikala.testqwondo.api.model");
 		factory.setDataSource(dataSource());
-		factory.setMappingResources("orm.xml");
+		//factory.setMappingResources("orm.xml");
 		factory.setJpaProperties(additionalProperties());
 		factory.afterPropertiesSet();
 		return factory.getObject();

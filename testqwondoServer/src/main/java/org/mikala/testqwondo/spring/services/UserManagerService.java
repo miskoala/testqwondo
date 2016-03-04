@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import org.mikala.testqwondo.api.UserManager;
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.api.model.UserRole;
-import org.mikala.testqwondo.api.model.UserRoleId;
 import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
@@ -46,7 +45,7 @@ public class UserManagerService implements UserManager {
 		userRepository.delete(idUser);
 	}
 
-	@Override
+/*	@Override
 	public User addRoleToUser(Role role, User user) {
 		if (role == null || user == null || user.getId() == null)
 			return null;
@@ -60,8 +59,8 @@ public class UserManagerService implements UserManager {
 		}
 		return userRepository.findOne(user.getId());
 	}
-
-	@Override
+*/
+/*	@Override
 	public User removeRoleFromUser(Role role, User user) {
 		if (role == null || user == null || user.getId() == null)
 			return user;
@@ -77,8 +76,8 @@ public class UserManagerService implements UserManager {
 		}
 		return user;
 	}
-
-	@Override
+*/
+/*	@Override
 	public boolean isUserHasRole(User user, Role role) {
 		if (user == null || role == null)
 			return false;
@@ -86,8 +85,8 @@ public class UserManagerService implements UserManager {
 			return true;
 		return false;
 	}
-	@Override
+*/	@Override
 	public Page<User> showUsers(String name, Pageable pageable) {
-		return userRepository.findByNameLikeIgnoreCase(name, pageable);
+		return userRepository.findByNameLike(name, pageable);
 	}
 }

@@ -157,7 +157,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 		userManagerService.deleteUser(u1.getId());
 		Assert.assertNull(userManagerService.getUser(userId));
 	}
-	@Test
+/*	@Test
 	@Rollback(false)
 	public void addRoleToUserTest() throws Exception {
 		User u = new User("login3", "password3", "name3", "email3", "jabber3");
@@ -171,7 +171,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 			UserRole userRole = (UserRole) iterator.next();
 			Assert.assertEquals(Role.ADMIN, userRole.getRole());
 		}
-	}
+	}*/
 	@Test(dependsOnMethods="addRoleToUserTest")
 	@Rollback(false)
 	public void userRolesTest(){
@@ -183,7 +183,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 			Assert.assertEquals(Role.ADMIN, userRole.getRole());
 		}
 	}
-	@Test
+/*	@Test
 	@Rollback(false)
 	public void removeRoleFromUserTest() {
 		User u = new User("login5", "password5", "name5", "email5", "jabber5");
@@ -204,9 +204,9 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 		Assert.assertTrue(u.getUserRoles()!=null && u.getUserRoles().size()==1);
 		User x= userManagerService.getUser(u.getId());
 		Assert.assertTrue(userManagerService.isUserHasRole(x, Role.ADMIN));
-	}
+	}*/
 
-	@Test
+/*	@Test
 	@Rollback(true)
 	public void hasRole2() {
 		User u = new User("login6", "password6", "name6", "email6", "jabber6");
@@ -214,5 +214,5 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 		u=userManagerService.addRoleToUser(Role.ADMIN, u);
 		User x= userManagerService.getUser(u.getId());
 		Assert.assertFalse(userManagerService.isUserHasRole(x, Role.TESTER));
-	}
+	}*/
 }

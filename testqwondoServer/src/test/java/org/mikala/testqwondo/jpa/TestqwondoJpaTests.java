@@ -18,13 +18,13 @@ import org.testng.annotations.Test;
 @SpringBootApplication
 @SpringApplicationConfiguration(ApplicationConfig.class)
 public class TestqwondoJpaTests extends AbstractTestNGSpringContextTests{
-	@Autowired
-	PlanRepository pr;
+	//@Autowired
+	//PlanRepository pr;
 	@Autowired
 	UserRepository ur;
 	@Test
 	public void testHome() throws Exception {
-		User u=new User("login", "password", "name", "email", "jabber");
+/*		User u=new User("login", "password", "name", "email", "jabber");
 		ur.save(u);
 		Plan p= new Plan("name1", "system", "systemversion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(), u);
 		pr.save(p);
@@ -38,6 +38,6 @@ public class TestqwondoJpaTests extends AbstractTestNGSpringContextTests{
 		pr.delete(p);
 		pr.delete(p1);
 		pr.delete(p2);
-		ur.delete(u);
+		ur.delete(u);*/
 	}
 }

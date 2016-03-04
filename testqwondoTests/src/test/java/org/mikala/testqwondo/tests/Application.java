@@ -31,7 +31,7 @@ public class Application {
 		return (args) -> {
 			User u = new User("admin", "password", "name", "email", "jabber");
 			ur.save(u);
-			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(),u);
+/*			Plan p= new Plan("name", "system", "systemVersion", new Date(), PlanType.P, PlanStatus.N, new Date(), new Date(),u);
 			repository.save(p);
 
 
@@ -52,7 +52,7 @@ public class Application {
 				log.info(plan1.toString());
 			}
             log.info("");
-		};
+*/		};
 	}
 
 }

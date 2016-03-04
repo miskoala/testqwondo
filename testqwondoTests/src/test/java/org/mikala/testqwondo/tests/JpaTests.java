@@ -21,7 +21,7 @@ public class JpaTests extends AbstractTestNGSpringContextTests{
 	//UserManagerService um;
 	@Test
 	public void testHome() throws Exception {
-		pr.findAll();
+		//pr.findAll();
 		
 	}
 }
