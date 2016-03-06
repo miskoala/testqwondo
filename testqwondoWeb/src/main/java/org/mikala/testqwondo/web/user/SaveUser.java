@@ -8,11 +8,13 @@ import javax.faces.context.FacesContext;
 
 import org.mikala.testqwondo.api.model.User;
 import org.mikala.testqwondo.spring.services.UserManagerService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
 public class SaveUser {
   
+  //@Autowired
   @ManagedProperty("#{userManagerService}")
   private UserManagerService userManagerService;
   private User user;
@@ -39,6 +41,7 @@ public class SaveUser {
    * @return the user
    */
   public User getUser() {
+    if(user==null) user=new User();
     return user;
   }
   /**
