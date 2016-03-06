@@ -4,8 +4,6 @@ import javax.validation.constraints.NotNull;
 
 import org.mikala.testqwondo.api.UserManager;
 import org.mikala.testqwondo.api.model.User;
-import org.mikala.testqwondo.api.model.UserRole;
-import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

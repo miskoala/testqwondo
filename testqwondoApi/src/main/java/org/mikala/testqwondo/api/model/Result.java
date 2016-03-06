@@ -2,17 +2,36 @@ package org.mikala.testqwondo.api.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.mikala.testqwondo.api.model.enums.ResultType;
+@Entity
+@Table(name="results")
 public class Result extends BaseEntity implements Serializable {
+	@Transient
 	private static final long serialVersionUID = 1L;
 
+	@Basic
+	@Column(name="bugzilla_nr")
 	private Integer bugzillaNr;
-
+	@Basic
+	@Column(columnDefinition="text")
 	private String description;
-
+	@Basic
 	private Boolean fixed;
-
-	private String type;
-
+	@Basic
+	@Column(length=20)
+	@Enumerated(EnumType.STRING)
+	private ResultType type;
+	@ManyToOne(targetEntity=Task.class,fetch=FetchType.LAZY,optional=false)
 	private Task task;
 
 	public Result() {
@@ -42,11 +61,11 @@ public class Result extends BaseEntity implements Serializable {
 		this.fixed = fixed;
 	}
 
-	public String getType() {
+	public ResultType getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(ResultType type) {
 		this.type = type;
 	}
 

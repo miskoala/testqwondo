@@ -4,155 +4,170 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.mikala.testqwondo.api.model.enums.PlanStatus;
 import org.mikala.testqwondo.api.model.enums.PlanType;
 
-
+@Entity
+@Table(name = "plans")
 public class Plan extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+  @Transient
+  private static final long serialVersionUID = 1L;
 
-	private String name;
+  @Basic
+  @Column(length = 100, nullable = false, unique = true)
+  @NotBlank
+  private String name;
+  @Basic
+  @Column(length = 100, nullable = true)
+  @Size(max = 100)
+  private String system;
+  @Basic
+  @Column(length = 100, nullable = true, name = "system_version")
+  @Size(max = 100)
+  private String systemVersion;
+  @Basic
+  @Column(length = 2, nullable = false)
+  @Enumerated(EnumType.STRING)
+  private PlanType type;
+  @Basic
+  @Column(length = 2, nullable = false)
+  @Enumerated(EnumType.STRING)
+  private PlanStatus status;
+  @Basic
+  @Column(name = "planed_start", nullable = true)
+  private Date planedStart;
+  @Basic
+  @Column(name = "planed_end", nullable = true)
+  private Date planedEnd;
+  @OneToMany(mappedBy = "plan", targetEntity = Task.class)
+  private Set<Task> tasks;
+  @OneToMany(mappedBy = "plan", targetEntity = TaskGroup.class)
+  private Set<TaskGroup> taskGroups;
 
-	private Date planedEnd;
+  public Plan() {}
 
-	private Date planedStart;
+  public Plan(final String planName, final PlanType planType, final PlanStatus planStatus,
+      final User planCreatedBy) {
+    super();
+    this.name = planName;
+    this.type = planType;
+    this.status = planStatus;
+    setCreatedBy(planCreatedBy);
+  }
 
-	private PlanStatus status;
+  public String getName() {
+    return name;
+  }
 
-	private String system;
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	private String systemVersion;
+  public Date getPlanedEnd() {
+    return planedEnd;
+  }
 
-	private PlanType type;
+  public void setPlanedEnd(Date planedEnd) {
+    this.planedEnd = planedEnd;
+  }
 
-	private Set<Task> tasks;
+  public Date getPlanedStart() {
+    return planedStart;
+  }
 
-	private Set<TaskGroup> taskGroups;
+  public void setPlanedStart(Date planedStart) {
+    this.planedStart = planedStart;
+  }
 
-	public Plan() {
-	}
+  public PlanStatus getStatus() {
+    return status;
+  }
 
-	public Plan(String name, String system, String systemversion, Date createtime, PlanType type, PlanStatus status,
-			Date planedstart, Date planedend, User createdBy) {
-		super();
-		this.name = name;
-		this.system = system;
-		this.systemVersion = systemversion;
-		setCreatedTime(createtime);
-		this.type = type;
-		this.status = status;
-		this.planedStart = planedstart;
-		this.planedEnd = planedend;
-		setCreatedBy(createdBy);
-	}
+  public void setStatus(PlanStatus status) {
+    this.status = status;
+  }
 
+  public String getSystem() {
+    return system;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public void setSystem(String system) {
+    this.system = system;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public String getSystemVersion() {
+    return systemVersion;
+  }
 
-	public Date getPlanedEnd() {
-		return planedEnd;
-	}
+  public void setSystemVersion(String systemVersion) {
+    this.systemVersion = systemVersion;
+  }
 
-	public void setPlanedEnd(Date planedEnd) {
-		this.planedEnd = planedEnd;
-	}
+  public PlanType getType() {
+    return type;
+  }
 
-	public Date getPlanedStart() {
-		return planedStart;
-	}
+  public void setType(PlanType type) {
+    this.type = type;
+  }
 
-	public void setPlanedStart(Date planedStart) {
-		this.planedStart = planedStart;
-	}
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
 
-	public PlanStatus getStatus() {
-		return status;
-	}
+  public Set<Task> getTasks() {
+    return this.tasks;
+  }
 
-	public void setStatus(PlanStatus status) {
-		this.status = status;
-	}
+  public void setTasks(Set<Task> tasks) {
+    this.tasks = tasks;
+  }
 
-	public String getSystem() {
-		return system;
-	}
+  public Task addTask(Task task) {
+    getTasks().add(task);
+    task.setPlan(this);
 
-	public void setSystem(String system) {
-		this.system = system;
-	}
+    return task;
+  }
 
-	public String getSystemVersion() {
-		return systemVersion;
-	}
+  public Task removeTask(Task task) {
+    getTasks().remove(task);
+    task.setPlan(null);
 
-	public void setSystemVersion(String systemVersion) {
-		this.systemVersion = systemVersion;
-	}
+    return task;
+  }
 
-	public PlanType getType() {
-		return type;
-	}
+  public Set<TaskGroup> getTaskGroups() {
+    return this.taskGroups;
+  }
 
-	public void setType(PlanType type) {
-		this.type = type;
-	}
+  public void setTaskGroups(Set<TaskGroup> taskgroups) {
+    this.taskGroups = taskgroups;
+  }
 
+  public TaskGroup addTaskgroup(TaskGroup taskgroup) {
+    getTaskGroups().add(taskgroup);
+    taskgroup.setPlan(this);
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    return taskgroup;
+  }
 
+  public TaskGroup removeTaskgroup(TaskGroup taskgroup) {
+    getTaskGroups().remove(taskgroup);
+    taskgroup.setPlan(null);
 
-
-
-	public Set<Task> getTasks() {
-		return this.tasks;
-	}
-
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
-	}
-
-	public Task addTask(Task task) {
-		getTasks().add(task);
-		task.setPlan(this);
-
-		return task;
-	}
-
-	public Task removeTask(Task task) {
-		getTasks().remove(task);
-		task.setPlan(null);
-
-		return task;
-	}
-
-	public Set<TaskGroup> getTaskGroups() {
-		return this.taskGroups;
-	}
-
-	public void setTaskGroups(Set<TaskGroup> taskgroups) {
-		this.taskGroups = taskgroups;
-	}
-
-	public TaskGroup addTaskgroup(TaskGroup taskgroup) {
-		getTaskGroups().add(taskgroup);
-		taskgroup.setPlan(this);
-
-		return taskgroup;
-	}
-
-	public TaskGroup removeTaskgroup(TaskGroup taskgroup) {
-		getTaskGroups().remove(taskgroup);
-		taskgroup.setPlan(null);
-
-		return taskgroup;
-	}
+    return taskgroup;
+  }
 
 }

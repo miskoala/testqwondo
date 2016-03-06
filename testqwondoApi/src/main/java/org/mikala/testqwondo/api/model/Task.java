@@ -4,31 +4,65 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.mikala.testqwondo.api.model.enums.TaskStatus;
 
+@Entity
+@Table(name = "tasks")
 public class Task extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Basic
+	@Column(columnDefinition = "text",nullable=false)
+	@NotBlank
 	private String description;
 
+	@Basic
 	private Long duration;
 
+	@Basic
+	@Column(name = "end_time")
 	private Timestamp endTime;
 
+	@Basic
+	@Column(name = "start_time")
 	private Timestamp startTime;
 
-	private String status;
+	@Basic
+	private TaskStatus status;
 
+	@Basic
+	@Column(length = 50)
+	@Size(max=50)
 	private String symbol;
 
-	private Set<Result> results;
-
+	@ManyToOne(targetEntity = Plan.class, fetch = FetchType.LAZY,optional=false)
+	@JoinColumn(name = "plan_id")
 	private Plan plan;
 
+	@OneToMany(mappedBy = "task", targetEntity = Result.class)
+	private Set<Result> results;
+
+	@ManyToOne(targetEntity=TaskGroup.class,fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="task_group_id")
 	private TaskGroup taskGroup;
 
+	@ManyToOne(targetEntity=User.class,fetch=FetchType.LAZY)
+	@JoinColumn(name="started_user_id")
 	private User startedUser;
 
+	@ManyToOne(targetEntity=User.class,fetch=FetchType.LAZY)
+	@JoinColumn(name="ended_user_id")
 	private User endedUser;
 
 	public Task() {
@@ -66,11 +100,11 @@ public class Task extends BaseEntity implements Serializable {
 		this.startTime = starttime;
 	}
 
-	public String getStatus() {
+	public TaskStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(TaskStatus status) {
 		this.status = status;
 	}
 

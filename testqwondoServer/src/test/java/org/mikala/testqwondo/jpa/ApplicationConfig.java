@@ -37,7 +37,7 @@ class ApplicationConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource driver = new DriverManagerDataSource();
 		driver.setDriverClassName("org.postgresql.Driver");
-		driver.setUrl("jdbc:postgresql://localhost:5437/testqwondo");
+		driver.setUrl("jdbc:postgresql://localhost:5432/testqwondo");
 		driver.setUsername("postgres");
 		driver.setPassword("resist");
 		return driver;

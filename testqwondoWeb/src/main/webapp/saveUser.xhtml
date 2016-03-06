@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <script name="jquery/jquery.js" library="primefaces"></script>
+    <title>Nowy użytkownik</title>
+</h:head>
+<h:form>
+    <p:growl id="messages"></p:growl>
+    <p:panelGrid columns="2">
+        
+        <p:outputLabel value="Name:"></p:outputLabel>
+        <p:inputText value="#{saveUser.user.name}"></p:inputText>
+        
+        <p:outputLabel value="Login:"></p:outputLabel>
+        <p:inputText value="#{saveUser.user.login}"></p:inputText>
+
+        <p:outputLabel value="Password:"></p:outputLabel>
+        <p:inputText value="#{saveUser.user.password}"></p:inputText>
+
+        <p:outputLabel value="Jabber:"></p:outputLabel>
+        <p:inputText value="#{saveUser.user.jabber}"></p:inputText>
+
+    </p:panelGrid>
+    <p:commandButton value="Zapisz" action="#{saveUser.save}" update="messages"></p:commandButton>
+</h:form>
+</html>
