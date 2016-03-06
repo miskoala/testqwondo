@@ -1,5 +1,7 @@
 package org.mikala.testqwondo.web.user;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -12,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @ManagedBean
 @SessionScoped
-public class SaveUser {
+public class SaveUser implements Serializable{
   
-  //@Autowired
+  @Autowired
   @ManagedProperty("#{userManagerService}")
   private UserManagerService userManagerService;
   private User user;
