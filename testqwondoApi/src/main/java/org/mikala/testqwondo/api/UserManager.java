@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserManager {
 	public User getUser(Long userId);
-	public User saveUser(User user);
+	public User saveUser(User user)  throws Exception;
 	public void deleteUser(User user);
 	public void deleteUser(Long idUser);
 	

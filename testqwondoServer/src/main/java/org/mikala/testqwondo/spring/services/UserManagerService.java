@@ -1,7 +1,10 @@
 package org.mikala.testqwondo.spring.services;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 
+import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.NotNull;
 
 import org.mikala.testqwondo.api.UserManager;
@@ -26,15 +29,29 @@ public class UserManagerService implements UserManager {
 
 	@Autowired
 	UserRoleRepository userRoleRepository;
-
+	
 	@Override
 	public User getUser(Long userId) {
 		return userRepository.findOne(userId);
 	}
 
 	@Override
-	public User saveUser(@NotNull User user) {
-		return userRepository.save(user);
+	public User saveUser(@NotNull User user) throws SQLException  {
+		try {
+			user=userRepository.save(user);	
+			
+		} catch (Exception e) {
+			Throwable couse = e.getCause();
+			if(couse!=null){
+				Throwable sqlEx = couse.getCause();
+				if(sqlEx instanceof SQLException){
+					throw (SQLException) sqlEx;
+				}
+
+			}
+			throw e;
+		}
+		return user;
 	}
 
 	@Override

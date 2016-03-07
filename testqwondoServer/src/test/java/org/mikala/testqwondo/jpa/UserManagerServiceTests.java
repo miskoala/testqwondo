@@ -1,5 +1,6 @@
 package org.mikala.testqwondo.jpa;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -29,9 +30,20 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	UserManagerService userManagerService;
 
 	private Long userId;
+	
+	@Test(expectedExceptions=SQLException.class)
+	@Rollback(true)
+	public void findByLoginTest() throws Exception {
+			User u = new User("login", "password", "name", "email", "jabber");
+			u=userManagerService.saveUser(u);
+			User u1 = new User("login", "password", "name", "email", "jabber");
+			u1=userManagerService.saveUser(u1);
+	}
+	
+	
 	@BeforeClass
 	@Rollback(false)
-	public void beforeClass(){
+	public void beforeClass() throws Exception{
 		logger.info("Start testów w klasie UserManagerServiceTests");
 		for (int i = 0; i <= 100; i++) {
 			User user = new User("login"+i+"login", "password", "name"+i+"name", "email", "jabber");
@@ -73,61 +85,49 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	
 	
 	@Test(expectedExceptions=IllegalArgumentException.class)
+	//@Test
 	@Rollback(true)
-	public void addUserValidate1Test() {
-		try {
+	public void addUserValidate1Test() throws Exception, ConstraintViolationException {
 			User u=null;// = new User("", "", "", "", "");
 			u=userManagerService.saveUser(u);
-		} catch (IllegalArgumentException e) {
-			throw e;
-		}
 	}	
 	@Test(expectedExceptions=ConstraintViolationException.class)
+	//@Test
 	@Rollback(true)
-	public void addUserValidateEmptyTest() {
-		try {
+	public void addUserValidateEmptyTest() throws Exception, ConstraintViolationException {
+
 			User u = new User("", "", "", "", "");
 			u=userManagerService.saveUser(u);
-		} catch (ConstraintViolationException e) {
-			Assert.assertTrue(e.getConstraintViolations().size()>=4);
-			throw e;
-		}
 	}
 	@Test(expectedExceptions=ConstraintViolationException.class)
+	//@Test
 	@Rollback(true)
-	public void addUserValidateEmpty1Test() {
-		try {
+	public void addUserValidateEmpty1Test() throws  SQLException, ConstraintViolationException {
 			User u = new User(null, null, null, null, null);
 			u=userManagerService.saveUser(u);
-		} catch (ConstraintViolationException e) {
-			Assert.assertTrue(e.getConstraintViolations().size()==4);
-			throw e;
-		}
 	}
 
 	@Test(expectedExceptions=ConstraintViolationException.class)
+	//@Test
 	@Rollback(true)
-	public void addUserValidateNameTest() {
-		try {
+	public void addUserValidateNameTest() throws  SQLException, ConstraintViolationException {
+
 			User u = new User("login", "password", null, "email", "jabber");
 			u=userManagerService.saveUser(u);
 			User u1 = new User("loginc", "passwordc", "", "emailc", "jabberc");
 			u1=userManagerService.saveUser(u1);
 			
-		} catch (ConstraintViolationException e) {
-			throw e;
-		}
 	}
 	@Test
 	@Rollback(true)
-	public void addUserTest() {
+	public void addUserTest() throws  SQLException  {
 		User u = new User("logina", "passworda", "namea", "emaila", "jabbera");
 		u=userManagerService.saveUser(u);
 		Assert.assertNotNull(userManagerService.getUser(u.getId()));
 	}
 	@Test
 	@Rollback(true)
-	public void getUserTest() {
+	public void getUserTest() throws Exception {
 		User u = new User("loginb", "passwordb", "nameb", "emailb", "jabberb");
 		u=userManagerService.saveUser(u);
 		User u1=userManagerService.getUser(u.getId());
@@ -141,7 +141,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	}
 	@Test
 	@Rollback(true)
-	public void deleteUserByUserTest() {
+	public void deleteUserByUserTest() throws Exception {
 		User u = new User("login1", "password1", "name1", "email1", "jabber1");
 		long userId=userManagerService.saveUser(u).getId();
 		User u1=userManagerService.getUser(userId);
@@ -150,7 +150,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	}
 	@Test
 	@Rollback(true)
-	public void deleterByIdUserTest() {
+	public void deleterByIdUserTest() throws Exception {
 		User u = new User("login2", "password2", "name2", "email2", "jabber2");
 		long userId=userManagerService.saveUser(u).getId();
 		User u1=userManagerService.getUser(userId);
@@ -185,7 +185,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	}
 	@Test
 	@Rollback(false)
-	public void removeRoleFromUserTest() {
+	public void removeRoleFromUserTest() throws Exception {
 		User u = new User("login5", "password5", "name5", "email5", "jabber5");
 		userManagerService.saveUser(u);
 		u=userManagerService.addRoleToUser(Role.ADMIN, u);
@@ -197,7 +197,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 	}
 	@Test
 	@Rollback(true)
-	public void hasRole1() {
+	public void hasRole1() throws Exception {
 		User u = new User("login4", "password4", "name4", "email4", "jabber4");
 		userManagerService.saveUser(u);
 		u=userManagerService.addRoleToUser(Role.ADMIN, u);
@@ -208,7 +208,7 @@ public class UserManagerServiceTests extends AbstractTransactionalTestNGSpringCo
 
 	@Test
 	@Rollback(true)
-	public void hasRole2() {
+	public void hasRole2() throws Exception {
 		User u = new User("login6", "password6", "name6", "email6", "jabber6");
 		userManagerService.saveUser(u);
 		u=userManagerService.addRoleToUser(Role.ADMIN, u);

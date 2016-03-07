@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="users")
+
 public class User implements Serializable {
 	
 
@@ -34,6 +35,7 @@ public class User implements Serializable {
 	@Column(length=50, unique=true, nullable=false)
 	@NotBlank
 	@Size(min=2,max=50)
+
 	private String login;
 	
 	@Basic
@@ -60,7 +62,7 @@ public class User implements Serializable {
 	private String password;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, 
-			orphanRemoval=true, targetEntity=UserRole.class, cascade={CascadeType.ALL})
+			targetEntity=UserRole.class, cascade={CascadeType.ALL})
 	private Set<UserRole> userRoles;
 
 	public User() {
