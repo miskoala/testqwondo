@@ -153,7 +153,7 @@ public class User implements Serializable {
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
+		//result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
 		return result;
 	}
 	/* (non-Javadoc)
@@ -213,13 +213,13 @@ public class User implements Serializable {
 		} else if (!password.equals(other.password)) {
 			return false;
 		}
-		if (userRoles == null) {
+		/*if (userRoles == null) {
 			if (other.userRoles != null) {
 				return false;
 			}
 		} else if (!userRoles.equals(other.userRoles)) {
 			return false;
-		}
+		}*/
 		return true;
 	}
 	

@@ -41,9 +41,12 @@ public class TestqwondoJpaUsersTests extends AbstractTestNGSpringContextTests{
 			UserRole userRole = (UserRole) iterator.next();
 			System.out.println(userRole);
 		}
-		urr.delete(userRoleAdmin);
-		urr.delete(userRoleTester);
-		u.setUserRoles(null);
-		ur.delete(u);
+
+		urr.delete(userRoleAdmin.getId());
+		urr.delete(userRoleTester.getId());
+		//u.removeUserRole(userRoleAdmin);
+		//u.removeUserRole(userRoleTester);
+		ur.delete(u);	
+		u.getId();
 	}
 }

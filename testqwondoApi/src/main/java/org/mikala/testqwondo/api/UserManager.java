@@ -11,9 +11,9 @@ public interface UserManager {
 	public void deleteUser(User user);
 	public void deleteUser(Long idUser);
 	
-	//public User addRoleToUser(Role role,User user);
-	//public User removeRoleFromUser(Role role, User user);
-	//public boolean isUserHasRole(User user,Role role);
+	public User addRoleToUser(Role role,User user);
+	public User removeRoleFromUser(Role role, User user);
+	public boolean isUserHasRole(User user,Role role);
 	
 	Page<User> showUsers(String name, Pageable pageable);
 }

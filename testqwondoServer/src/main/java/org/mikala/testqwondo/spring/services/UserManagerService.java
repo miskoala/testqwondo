@@ -1,9 +1,13 @@
 package org.mikala.testqwondo.spring.services;
 
+import java.util.Iterator;
+
 import javax.validation.constraints.NotNull;
 
 import org.mikala.testqwondo.api.UserManager;
 import org.mikala.testqwondo.api.model.User;
+import org.mikala.testqwondo.api.model.UserRole;
+import org.mikala.testqwondo.api.model.enums.Role;
 import org.mikala.testqwondo.spring.repository.UserRepository;
 import org.mikala.testqwondo.spring.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,47 +47,53 @@ public class UserManagerService implements UserManager {
 		userRepository.delete(idUser);
 	}
 
-/*	@Override
+	@Override
 	public User addRoleToUser(Role role, User user) {
 		if (role == null || user == null || user.getId() == null)
 			return null;
-		UserRoleId userRoleId = new UserRoleId(user.getId(), role);
-		UserRole userRole = userRoleRepository.findOne(userRoleId);
-		if (userRole == null) {
-			userRole = new UserRole(userRoleId, user);
-			userRoleRepository.save(userRole);
-			user.addUserRole(userRole);
-			userRepository.save(user);
-		}
+		UserRole userRole = new UserRole(user,role);
+		userRoleRepository.save(userRole);
+		user.addUserRole(userRole);
+		userRepository.save(user);
 		return userRepository.findOne(user.getId());
 	}
-*/
-/*	@Override
+
+	@Override
 	public User removeRoleFromUser(Role role, User user) {
 		if (role == null || user == null || user.getId() == null)
 			return user;
 		if(!isUserHasRole(user, role)) 
 			return user;
-		UserRoleId userRoleId = new UserRoleId(user.getId(), role);
-		UserRole userRole=userRoleRepository.findOne(userRoleId);
-		user.removeUserRole(userRole);
-		user=userRepository.save(user);
-		try { //czasami (transakcje) roli juz nie ma
-			userRoleRepository.delete(userRoleId);	
-		} catch (Exception e) {
+		Iterator<UserRole> userRolesIter = user.getUserRoles().iterator();
+		while (userRolesIter.hasNext()) {
+			UserRole userRole = (UserRole) userRolesIter.next();
+			if(userRole.getRole().equals(role)){
+				user.removeUserRole(userRole);
+				user=userRepository.save(user);
+				try { //czasami (transakcje) roli juz nie ma
+					userRoleRepository.delete(userRole.getId());	
+				} catch (Exception e) {
+				}
+				break;
+			}
 		}
 		return user;
 	}
-*/
-/*	@Override
+
+	@Override
 	public boolean isUserHasRole(User user, Role role) {
-		if (user == null || role == null)
+		if (user == null || role == null || user.getUserRoles()==null || user.getUserRoles().size()==0)
 			return false;
-		if (userRoleRepository.findOne(new UserRoleId(user.getId(), role)) != null)
-			return true;
+		Iterator<UserRole> userRolesIter = user.getUserRoles().iterator();
+		while (userRolesIter.hasNext()) {
+			UserRole userRole = (UserRole) userRolesIter.next();
+			if(userRole.getRole().equals(role)){
+				return true;
+			}
+		}
 		return false;
 	}
-*/	@Override
+	@Override
 	public Page<User> showUsers(String name, Pageable pageable) {
 		return userRepository.findByNameLike(name, pageable);
 	}

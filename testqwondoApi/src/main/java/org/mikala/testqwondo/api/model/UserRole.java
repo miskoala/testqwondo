@@ -78,7 +78,7 @@ public class UserRole implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((user.getId() == null) ? 0 : user.getId().hashCode());
+		result = prime * result + ((user==null || user.getId() == null) ? 0 : user.getId().hashCode());
 		return result;
 	}
 
